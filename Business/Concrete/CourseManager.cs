@@ -20,9 +20,9 @@ namespace Business.Concrete
             _lecturerDal = lecturerDal;
         }
 
-        public void AddCourse(Course course, Lecturer lecturer)
+        public void AddCourse(Course course)
         {
-            _courseDal.AddCourse(course, lecturer);
+            _courseDal.AddCourse(course);
         }
 
         public void UpdateCourse(Course course)

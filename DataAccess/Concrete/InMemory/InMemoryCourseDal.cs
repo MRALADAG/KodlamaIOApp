@@ -72,16 +72,19 @@ namespace DataAccess.Concrete.InMemory
 
         public List<Course> GetAllEnrolledCourse(Student student)
         {
-            List<Course> allCourses = new List<Course>();
+            //List<Course> allCourses = new List<Course>();
 
-            student.RegisteredForCourseId.ForEach(c =>
-            {
-                allCourses.Add(_courses.Find(item => item.CourseId == c));
-            });
-            return allCourses;
+            //student.RegisteredForCourseId.ForEach(c =>
+            //{
+            //    allCourses.Add(_courses.Find(item => item.CourseId == c));
+            //});
+            //return allCourses;
 
             // II. Way;
             //return _courses.Where(c => student.RegisteredForCourseId.All(r => r == c.CourseId)).ToList();
+
+            // III. Way;
+            return _courses.Where(c => student.RegisteredForCourseId.Contains(c.CourseId)).ToList();
         }
 
         public void RemoveCourse(Course course)
