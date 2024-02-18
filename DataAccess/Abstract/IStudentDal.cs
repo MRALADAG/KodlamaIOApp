@@ -1,0 +1,15 @@
+﻿using Entities.Concrete;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAccess.Abstract
+{
+    public interface IStudentDal : IEntityRepository<Student>
+    {
+        void EnrollCourse(Student student, Course course);
+        List<int> GetAllEnrolledCourse(int studentId);
+    }
+}
