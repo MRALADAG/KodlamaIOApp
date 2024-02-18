@@ -46,7 +46,7 @@ class Program
         });
 
         Console.WriteLine("\nBütün kursların listesi:\n");
-        CourseManager courseManager = new CourseManager(new InMemoryCourseDal());
+        CourseManager courseManager = new CourseManager(new InMemoryCourseDal(), new InMemoryLecturerDal());
         courseManager.GetAllCourses().ForEach(course => Console.WriteLine(course.ToString()));
 
         Console.WriteLine("\nBütün {0} isimli öğrencinin kayıtlı olduğu kursların listesi:\n", student.UserName);
@@ -62,7 +62,7 @@ class Program
         List<Course> courses = courseManager.GetAllCourses().Where(c => student2.RegisteredForCourseId.All(r => r == c.CourseId)).ToList();
         courses.ForEach(c => Console.WriteLine(c.ToString()));
 
-        Console.WriteLine("********************Get student all enrolled courses************************");
+        Console.WriteLine("\n********************Get student all enrolled courses************************");
         courseManager.GetAllEnrolledCourse(student).ForEach(c => Console.WriteLine(c.ToString()));
     }
 }
