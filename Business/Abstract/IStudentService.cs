@@ -13,5 +13,6 @@ namespace Business.Abstract
         void UpdateStudent(Student student);
         Student GetStudentById(int studentId);
         List<Student> GetAll();
+        void EnrollCourse(Student student, Course course);
     }
 }

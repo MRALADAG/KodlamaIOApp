@@ -22,9 +22,7 @@ namespace Entities.Concrete
         public string LecturerLastName { get; set; }
         public string LecturerEmail { get; set; }
         public string Password { get; set; }
-
         public bool LecturerAuth { get; set; }
-
-        public List<Course> CoursesToLecturer { get; set; } = new List<Course>();
+        public List<int> CoursesIdToLecturer { get; set; } = new List<int>();
     }
 }

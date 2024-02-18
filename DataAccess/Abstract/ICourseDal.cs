@@ -14,6 +14,7 @@ namespace DataAccess.Abstract
         void RemoveCourse(Course course);
         Course GetCourseById(int courseId);
         List<Course> GetAllCourses();
+        void EnrollCourse(Course course, Student student);
         List<Course> GetAllEnrolledCourse(Student student);
     }
 }

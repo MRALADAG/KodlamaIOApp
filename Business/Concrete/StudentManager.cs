@@ -47,5 +47,10 @@ namespace Business.Concrete
         {
             return _studentDal.GetAll();
         }
+
+        public void EnrollCourse(Student student, Course course)
+        {
+            _studentDal.EnrollCourse(student, course);
+        }
     }
 }

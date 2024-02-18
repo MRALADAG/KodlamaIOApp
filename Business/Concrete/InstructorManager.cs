@@ -34,12 +34,12 @@ namespace Business.Concrete
 
         public void UpdateLecturer(Lecturer lecturer)
         {
-            throw new NotImplementedException();
+            _lecturerDal.Update(lecturer);
         }
 
         public Lecturer GetLecturerById(int id)
         {
-            throw new NotImplementedException();
+            return _lecturerDal.GetById(id);
         }
 
         public List<Lecturer> GetAll()

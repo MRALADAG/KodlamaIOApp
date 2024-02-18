@@ -27,6 +27,33 @@ namespace Entities.Concrete
 
         public List<int> RegisteredForCourseId { get; set; } = new List<int>();
 
+        public Student()
+        {
+
+        }
+
+        public Student(int userId, int studentId, string studentFirstName, string studentLastName, string studentEmail, string password)
+        {
+            UserId = userId;
+            StudentId = studentId;
+            StudentFirstName = studentFirstName;
+            StudentLastName = studentLastName;
+            StudentEmail = studentEmail;
+            Password = password;
+        }
+
+        public Student(int userId, int studentId, string studentFirstName, string studentLastName, string studentEmail, string password, bool studentAuth, List<int> registeredForCourseId)
+        {
+            UserId = userId;
+            StudentId = studentId;
+            StudentFirstName = studentFirstName;
+            StudentLastName = studentLastName;
+            StudentEmail = studentEmail;
+            Password = password;
+            StudentAuth = studentAuth;
+            RegisteredForCourseId = registeredForCourseId;
+        }
+
         public string ToString()
         {
             string courses = "";

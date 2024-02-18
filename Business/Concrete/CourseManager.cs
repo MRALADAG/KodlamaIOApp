@@ -12,15 +12,30 @@ namespace Business.Concrete
     public class CourseManager : ICourseService
     {
         private ICourseDal _courseDal;
+        private ILecturerDal _lecturerDal;
 
-        public CourseManager(ICourseDal courseDal)
+        public CourseManager(ICourseDal courseDal, ILecturerDal lecturerDal)
         {
             _courseDal = courseDal;
+            _lecturerDal = lecturerDal;
         }
 
-        public void AddCourse(Course course)
+        public void AddCourse(Course course, Lecturer lecturer)
         {
-            _courseDal.AddCourse(course);
+            _courseDal.AddCourse(course, lecturer);
+        }
+
+        public void UpdateCourse(Course course)
+        {
+            _courseDal.GetAllCourses().Where(c => c.CourseId == course.CourseId).ToList().ForEach(c => c = course);
+        }
+
+        public void RemoveCourse(Course course)
+        {
+            Lecturer updatedLecturer = _lecturerDal.GetById(course.InstructorId);
+            updatedLecturer.CoursesIdToLecturer.Remove(course.CourseId);
+            _lecturerDal.Update(updatedLecturer);
+            _courseDal.RemoveCourse(course);
         }
 
         public List<Course> GetAllCourses()
@@ -31,6 +46,11 @@ namespace Business.Concrete
         public List<Course> GetAllEnrolledCourse(Student student)
         {
             return _courseDal.GetAllEnrolledCourse(student);
+        }
+
+        public Course GetCourseById(int courseId)
+        {
+            return _courseDal.GetCourseById(courseId);
         }
     }
 }

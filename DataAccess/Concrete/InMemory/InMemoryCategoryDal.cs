@@ -43,17 +43,17 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Category category)
         {
-            throw new NotImplementedException();
+            _categories.Where(c => c.CategoryId == category.CategoryId).ToList().ForEach(c => c = category);
         }
 
         public void Delete(Category category)
         {
-            throw new NotImplementedException();
+            _categories.Remove(_categories.Find(c => c.CategoryId == category.CategoryId));
         }
 
         public Category GetById(int id)
         {
-            throw new NotImplementedException();
+            return _categories.Find(c => c.CategoryId == id);
         }
 
         public List<Category> GetAll()

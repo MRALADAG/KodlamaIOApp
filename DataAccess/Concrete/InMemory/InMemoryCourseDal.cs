@@ -10,6 +10,15 @@ namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryCourseDal : ICourseDal
     {
+        private IStudentDal _studentDal;
+        private ILecturerDal _lecturerDal;
+
+        public InMemoryCourseDal(IStudentDal studentDal, ILecturerDal lecturerDal)
+        {
+            _studentDal = studentDal;
+            _lecturerDal = lecturerDal;
+        }
+
         List<Course> _courses;
 
         public InMemoryCourseDal()
@@ -44,6 +53,9 @@ namespace DataAccess.Concrete.InMemory
 
         public void AddCourse(Course course)
         {
+            Lecturer updatedLecturer = _lecturerDal.GetById(course.InstructorId);
+            updatedLecturer.CoursesIdToLecturer.Add(course.CourseId);
+            _lecturerDal.Update(updatedLecturer);
             _courses.Add(course);
         }
 
@@ -52,9 +64,10 @@ namespace DataAccess.Concrete.InMemory
             _courses.Where(c => c.CourseId == course.CourseId).ToList().ForEach(c => c = course);
         }
 
-        public void EnrollCourse(Course course)
+        public void EnrollCourse(Course course, Student student)
         {
-            throw new NotImplementedException();
+            student.RegisteredForCourseId.Add(course.CourseId);
+            _studentDal.Update(student);
         }
 
         public List<Course> GetAllEnrolledCourse(Student student)
@@ -66,6 +79,9 @@ namespace DataAccess.Concrete.InMemory
                 allCourses.Add(_courses.Find(item => item.CourseId == c));
             });
             return allCourses;
+
+            // II. Way;
+            //return _courses.Where(c => student.RegisteredForCourseId.All(r => r == c.CourseId)).ToList();
         }
 
         public void RemoveCourse(Course course)
